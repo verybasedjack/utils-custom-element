@@ -18,7 +18,7 @@ if (import.meta.env.DEV) {
   });
 
   // Extend different base.
-  // define("x-d", HTMLButtonElement, (self) => {
-  //   // console.log(Object.getPrototypeOf(self));
-  // });
+  define("x-d", HTMLButtonElement, (self) => {
+    self.addEventListener("click", () => console.log("x-d"));
+  });
 }

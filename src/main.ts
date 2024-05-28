@@ -5,6 +5,12 @@ function define(
   baseClass: typeof HTMLElement = HTMLElement,
   initCallback?: (element: HTMLElement) => void
 ) {
+  const baseClassName = baseClass.name
+    .replace(/^HTML|Element$/g, "")
+    .toLowerCase();
+  const options =
+    baseClass !== HTMLElement ? { extends: baseClassName } : undefined;
+
   customElements.define(
     name,
     class extends baseClass {
@@ -21,10 +27,11 @@ function define(
 
       initializeAttributes() {
         Array.from(this.attributes).forEach((attr) => {
-          this[attr.name] = attr.value;
+          (this as any)[attr.name] = attr.value;
         });
       }
-    }
+    },
+    options
   );
 }
 
