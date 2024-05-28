@@ -1,4 +1,4 @@
-import { define } from "./main";
+import { define, withPrefix, withBase } from "./main";
 
 if (import.meta.env.DEV) {
   // Error propagation for non-valid custom element tag name.
@@ -21,4 +21,10 @@ if (import.meta.env.DEV) {
   define("x-d", HTMLButtonElement, (self) => {
     self.addEventListener("click", () => console.log("x-d"));
   });
+
+  const definePrefixed = withPrefix("k");
+  const defineBase = withBase(HTMLAudioElement);
+
+  definePrefixed("e", void 0, console.log);
+  defineBase("with-base", console.log);
 }

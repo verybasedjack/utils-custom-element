@@ -1,5 +1,21 @@
 import "./tests";
 
+function withPrefix(prefix: string) {
+  return (
+    name: string,
+    baseClass: typeof HTMLElement = HTMLElement,
+    initCallback?: (element: HTMLElement) => void
+  ) => {
+    return define(`${prefix}-${name}`, baseClass, initCallback);
+  };
+}
+
+function withBase(baseClass: typeof HTMLElement = HTMLElement) {
+  return (name: string, initCallback?: (element: HTMLElement) => void) => {
+    return define(name, baseClass, initCallback);
+  };
+}
+
 function define(
   name: string,
   baseClass: typeof HTMLElement = HTMLElement,
@@ -35,4 +51,4 @@ function define(
   );
 }
 
-export { define };
+export { define, withPrefix, withBase };
